@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin_Login</title>
+</head>
+<body>
+    <%- include("admin_header") %>
+    <!-- form -->
+    <form action="/Admin/Login" method="post">
+        <h2>Login</h2>
+        <label for="">Email</label>
+        <input type="email" name="Emails" required>
+
+        <div class="row justify-between">
+            <label for="">Password</label>
+            <label for=""><a href="/Admin/Reset">Forgot password?</a></label>
+        </div>
+        <input type="password" name="Passwords" required>
+
+        <button type="submit">Sign in</button>
+
+        <div class="create">
+            <a href="/Admin/Signup">Create account</a>
+        </div>
+        
+    </form>
+
+    <%- include("footer") %>
+</body>
+</html>

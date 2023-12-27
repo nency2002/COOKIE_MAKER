@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin_Profile</title>
+</head>
+<body>
+    <%- include("admin_header") %>
+
+    <div class="container">
+        <div class="name">
+            <h1>Profile Cookies</h1>
+        </div>
+        <div id="box"></div>
+    </div>
+
+    <script>
+
+        fetch("/Admin/Products")
+            .then((res) => res.json())
+            .then((data) => display(data));
+
+            const pro_delete = (id) => {
+                window.location.reload();
+                fetch(`/Admin/Delete/${id}`, {
+                    method: "delete",
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        const deletedElement = document.getElementById(id);
+                        if (deletedElement) {
+                            deletedElement.remove();
+                        }
+                    })
+                    .catch((error) => console.error(error));
+            };
+    
+        const display = (data) => {
+            document.getElementById("box").innerHTML = " ";
+            data.map((ele) => {
+                let img = document.createElement("img");
+                img.src = ele.image;
+                let title = document.createElement("p");
+                title.innerHTML = ele.title;
+                let price = document.createElement("p");
+                price.innerHTML =`MRP:Rs. ${ele.price}`;
+                let deletes = document.createElement("button");
+                deletes.innerHTML="DELETE"
+                deletes.addEventListener("click", () => pro_delete(ele._id));
+
+                let deletes1 = document.createElement("button");
+                deletes1.innerHTML="UPDATE"
+                deletes1.addEventListener("click", () => {
+                window.location.href = `/Admin/Update/${ele._id}`;
+            })
+    
+                let div = document.createElement("div");
+                div.append(img, title, price , deletes , deletes1);
+                document.getElementById("box").append(div);
+            });
+        };
+    </script>
+
+    <%- include("footer") %>
+</body>
+</html>

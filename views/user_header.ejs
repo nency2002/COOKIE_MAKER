@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User_Header</title>
+    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+</head>
+<body>
+    <!-- header -->
+    <header>
+        <div class="container">
+            <div class="row align-items justify-between">
+                <div class="logo">
+                   <div class="row  align-items">
+                   <div class="con">    
+                    <i class="fa-solid fa-list-ul"></i>
+                    <ul class="submenu">
+                        <li><a href="/User/Home">HOME</a></li>
+                        <li><a href="/User/Product">BUY COOKIES</a></li>
+                        <li><a href="/User/Product">COOKIES</a></li>
+                    </ul>
+                   </div>
+                    <a href="/User/Home"><img src="/images/logo.png" alt="cookieman logo"></a>
+                    <div class="search">
+                        <input type="text" placeholder="Search... "><button><i class="fa-solid fa-magnifying-glass"></i></button>
+                     </div>
+                   </div>
+                </div>
+                <div class="icons row">
+                    <a href="/User/Login"  id="account"><i class="fa-regular fa-user"></i>ACCOUNT</a>
+                    <a href="" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="/User/Cart"><i class="fa-solid fa-cart-shopping"></i>CART</a>
+                    <a href="/Admin/Home"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                 </div>
+            </div>
+        </div>
+    </header>
+</body>
+<script>
+
+document.getElementById("logout").style.display="none";
+   
+   let cookie = document.cookie;
+   if(cookie){
+       document.getElementById("account").style.display="none";
+       document.getElementById("logout").style.display="block";
+   }
+   let deletCookie = (name)=>{
+       document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+   }
+
+   
+   document.getElementById("logout").addEventListener("click",()=>deletCookie(cookie));
+</script>
+</html>

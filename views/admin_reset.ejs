@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin_Reset</title>
+</head>
+<body>
+    <%- include("admin_header") %>
+    <!-- form -->
+    <!-- form -->
+    <form action="/Admin/Sendmail" method="post">
+        <h2>Reset Password</h2>
+        <label for="">Email</label>
+        <input type="email" name="email" required>
+        <button type="submit">Otp Send</button>
+        
+    </form>
+    <!-- footer -->
+    <%- include("footer") %>
+</body>
+</html>

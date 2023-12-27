@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin_Signup</title>
+</head>
+<body>
+    <%- include("admin_header") %>
+    <!-- form -->
+    <form action="/Admin/Signup" method="post">
+        <h2>Create Account</h2>
+        <label for="">First Name</label>
+        <input type="text" name="Fsname" required>
+
+        <label for="">Last Name</label>
+        <input type="text" name="Lsname" required>
+
+        <label for="">Images</label>
+        <input type="url" name="Img" required>
+
+        <label for="">Email</label>
+        <input type="email" name="Emails" required>
+
+        <label for="">Password</label>
+        <input type="password" name="Passwords" required>
+
+        <button type="submit">Create</button>
+    </form>
+
+    <%- include("footer") %>
+</body>
+</html>

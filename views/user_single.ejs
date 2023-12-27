@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User_Single</title>
+</head>
+<body>
+    <!-- header -->
+    <%- include("user_header") %>
+    <section>
+        <div class="container">
+           <div class="row">
+            <div class="w-5">
+                <div class="images-box">
+                    <img src=<%= Single.image1 %> alt="">
+                </div>
+                <div class="images-box">
+                    <img src=<%= Single.image2 %> alt="">
+                </div>
+                <div class="images-box">
+                    <img src=<%= Single.image3 %> alt="">
+                </div>
+                <div class="images-box">
+                    <img src=<%= Single.image4 %> alt="">
+                </div>
+            </div>
+            <div class="w-20">
+                <div class="imagesbox">
+                    <img src=<%= Single.image %> alt="">
+                </div>
+            </div>
+            <div class="w-0">
+                <div class="images-content">
+                    <h2><%= Single.title %></h2>
+                    <span>Net Weight :<%= Single.weight %>g</span>
+                    <h4>Price</h4>
+                    <p class="price">MRP:Rs.<%= Single.price %>.00</p>
+                    <div class="offer">
+                        <img src="/images/offer.jpg" alt="">
+                    </div>
+                    <p>Inclusive of all Taxes</p>
+                    <button id="cartaddproduct">Add To Cart</button>
+                    <hr/>
+                    <pre>In stock, ready to ship</pre>
+                    <p>Order Dispatch within 24-48 hours!</p>
+                    <p>Free Delivery on all Prepaid Orders above ₹699/-</p>
+                    <p>COD Available Above ₹ 499/-</p>
+                </div>
+            </div>
+           </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <%- include("footer") %>
+</body>
+<script>
+     let url = window.location.href.split("/");
+    let id = url[url.length - 1];
+
+     const cart = (id) => {
+                console.log(id);
+                fetch(`/Admin/Cart/${id}`, {
+                    method: "POST",
+                    headers: { "Content-type": "application/json " },
+                    body: JSON.stringify({ productID: id }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => console.log(data));
+            };
+
+            document.getElementById("cartaddproduct").addEventListener("click", () => cart(id))
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User_Product</title>
+</head>
+<body>
+    <%- include("user_header") %>
+
+   
+    <div class="container">
+        <div class="name">
+            <h1>All Cookies</h1>
+        </div>
+        <div id="box"></div>
+    </div>
+
+    <%- include("footer") %>
+</body>
+
+<script>
+
+    fetch("/Admin/All")
+        .then((res) => res.json())
+        .then((data) => display(data));
+
+    const display = (data) => {
+        document.getElementById("box").innerHTML = " ";
+        data.map((ele) => {
+            let img = document.createElement("img");
+            img.src = ele.image;
+            let title = document.createElement("p");
+            title.innerHTML = ele.title;
+            let price = document.createElement("p");
+            price.innerHTML =`MRP:Rs. ${ele.price}`;
+
+            let div = document.createElement("div");
+            div.append(img, title, price);
+            div.addEventListener("click", (e) => {
+                e.preventDefault();
+                window.location.href = `/Admin/Single/${ele._id}`;
+            })
+            document.getElementById("box").append(div);
+        });
+    };
+</script>
+</html>

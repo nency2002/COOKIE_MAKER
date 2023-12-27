@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User_Login</title>
+</head>
+<body>
+    <%- include("user_header") %>
+
+     <!-- form -->
+
+    <form action="/User/Login" method="post">
+        <h2>Login</h2>
+        <label for="">Email</label>
+        <input type="email" name="email" required>
+
+        <div class="row justify-between">
+            <label for="">Password</label>
+            <label for=""><a href="/User/Reset">Forgot password?</a></label>
+        </div>
+        <input type="password" name="password" required>
+
+        <button type="submit">Sign in</button>
+
+        <div class="create">
+            <a href="/User/Signup">Create account</a>
+        </div>
+        
+    </form>
+
+    <!-- footer -->
+
+
+    <%- include("footer") %>
+</body>
+</html>

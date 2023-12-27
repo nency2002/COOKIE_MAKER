@@ -1,0 +1,48 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin_Data</title>
+</head>
+<body>
+    <%- include("admin_header") %>
+
+    <div class="container">
+        <div class="name">
+            <h1>Create Data</h1>
+        </div>
+        <div id="box"></div>
+    </div>
+
+    <script>
+
+        fetch("/Admin/Signups")
+            .then((res) => res.json())
+            .then((data) => display(data));
+    
+        const display = (data) => {
+            document.getElementById("box").innerHTML = " ";
+            data.map((ele) => {
+                let img = document.createElement("img");
+                img.src = ele.Img;
+                let firstname = document.createElement("p");
+                firstname.innerHTML =  `Firstname :${ele.Fsname}`;
+                let title = document.createElement("p");
+                title.innerHTML = `Lastname :${ele.Lsname}`;
+                let price = document.createElement("p");
+                price.innerHTML =ele.Emails;
+    
+                let div = document.createElement("div");
+                div.append(img , firstname, title, price);
+                document.getElementById("box").append(div);
+            });
+        };
+    </script>
+
+    <%- include("footer") %>
+</body>
+</html>

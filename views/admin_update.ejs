@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin_Update</title>
+</head>
+<body>
+    <!-- header -->
+    <%- include("admin_header") %>
+    <!-- form -->
+    <form action="/Admin/Update/:id" method="post"  id="updateform">
+        <h2>Product Update</h2>
+        <label for="">Product Images</label>
+        <input type="url" name="image" id="image" value="<%= data.image %>">
+
+        <label for="">Product Images_1</label>
+        <input type="url"  name="image1" id="image1" value="<%= data.image1 %>">
+
+        
+        <label for="">Product Images_2</label>
+        <input type="url" name="image2" id="image2" value="<%= data.image2 %>">
+
+        
+        <label for="">Product Images_3</label>
+        <input type="url" name="image3" id="image3" value="<%= data.image3 %>">
+
+        <label for="">Product Images_4</label>
+        <input type="url" name="image4" id="image4" value="<%= data.image4 %>">
+
+        <label for="">Product Title</label>
+        <input type="text" name="title" id="title" value="<%= data.title %>"> 
+
+        <label for="">Product Weight</label>
+        <input type="text" name="weight" id="weight" value="<%= data.weight %>">
+        
+        <label for="">Product Price</label>
+        <input type="text" name="price" id="price" value="<%= data.price %>">
+
+        <button type="submit">Create</button>
+    </form>
+    
+    <!-- footer -->
+    <%- include("footer") %>
+</body>
+<script>
+     let url = window.location.href.split("/");
+    console.log(url)
+    let id = url[url.length - 1]
+    console.log(id)
+
+     document.getElementById("updateform").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const udata = {
+            image: document.getElementById("image").value,
+            image1: document.getElementById("image1").value,
+            image2: document.getElementById("image2").value,
+            image3: document.getElementById("image3").value,
+            image4: document.getElementById("image4").value,
+            title: document.getElementById("title").value,
+            weight: document.getElementById("weight").value,
+            price: document.getElementById("price").value,
+        }
+        console.log(udata)
+        fetch(`/Admin/Edit/${id}`, {
+            method: "PATCH",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(udata,
+            alert('Update successfully'),
+            image.value="",
+            image1.value="",
+            image2.value="",
+            image3.value="",
+            image4.value="",
+            title.value="",
+            weight.value="",
+            price.value="",
+            window.location.href = "/Admin/Home",
+            )
+        });
+    })
+</script>
+</html>

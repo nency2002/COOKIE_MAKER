@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otp</title>
+</head>
+<body>
+    <%- include("admin_header") %>
+    <!-- form -->
+    <form action="/Admin/Verify" method="post">
+        <h2>Otp Varify</h2>
+        <label for="">Email</label>
+        <input type="email" name="email" required>
+
+        <label for="">Password</label>
+        <input type="password" name="password" required>
+
+        <label for="">Otp</label>
+        <input type="number" name="cotp" required>
+        <button type="submit">Otp Send</button>
+    </form>
+    <!-- footer -->
+    <%- include("footer") %>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User_Cart</title>
+    <style>
+        /* #box button {
+            display: inline-block;
+        } */
+    </style>
+</head>
+<body>
+    <%- include("user_header") %>
+    
+        <div class="container">
+            <div id="cart"></div>
+        </div>
+    
+    <%- include("footer") %>
+</body>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <script>
+
+const HandlePay = async (amount) => {
+                let res = await fetch("/Admin/Payment", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({ amount: amount })
+                });
+                let order = await res.json();
+                console.log(order);
+
+                let options = {
+                    key: "rzp_test_67TKW3OGPNMj27",
+                    amount: order.amount,
+                };
+                var repyer = new Razorpay(options);
+                repyer.open();
+            }
+
+         const HandleQty = (id, val) => {
+                fetch(`/Admin/Crat/Update/${id}`, {
+                    method: "PATCH",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({ val: val })
+                })
+                    .then((response) => response.json())
+                    .then((data) => window.location.reload())
+                    .catch((error) => console.log(error));
+            }
+
+      let Tprice = 0;
+            const display = (data) => {
+                document.getElementById("cart").innerHTML = " ";
+                data.map((element) => {
+                    let ele = element.productID
+                    Tprice += ele.price * element.qty
+                    let img = document.createElement("img");
+                    img.src = ele.image;
+                    let title = document.createElement("h1");
+                    title.innerHTML = ele.title;
+                    let price = document.createElement("h3");
+                    price.innerHTML = ` MRP:Rs. : ${ele.price}`;
+
+                    let btn1 = document.createElement("button");
+                    btn1.innerHTML = "-";
+                    btn1.addEventListener("click", () => HandleQty(element._id, -1));
+
+                    let qty = document.createElement("button");
+                    qty.innerHTML = `QTY ${element.qty}`;
+                    let btn2 = document.createElement("button");
+                    btn2.innerHTML = "+";
+                    btn2.addEventListener("click", () => HandleQty(element._id, 1));
+
+                    let div = document.createElement("div");
+                    div.append(img, title, price, btn1, btn2, qty);
+                    document.getElementById("cart").append(div);
+                });
+
+                let pricebutton = document.createElement("button");
+                pricebutton.innerHTML = `total price ${Tprice}`;
+                let checkuout = document.createElement("button");
+                checkuout.innerHTML = "Checkout";
+                checkuout.addEventListener("click", () => HandlePay(Tprice));
+                document.getElementById("cart").append(pricebutton, checkuout);
+            };
+
+
+        fetch("/Admin/CartData")
+                .then((res) => res.json())
+                .then((data) => display(data));
+
+    </script>
+</html>
